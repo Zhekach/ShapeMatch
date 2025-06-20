@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class ShapeView : MonoBehaviour
 {
-    [SerializeField] private Image _icon;
-    [SerializeField] private Image _frame;
+    [SerializeField] private SpriteRenderer _icon;
+    [SerializeField] private SpriteRenderer _background;
 
     public void Initialize(ShapeConfig data)
     {
-        _icon.sprite = data.Icon;
-        _frame.color = data.FrameColor;
-        // форма – через спрайт или маску, если надо
+        var spriteRendererIcon = _icon.gameObject.GetComponent<SpriteRenderer>();
+        //spriteRendererIcon.sprite = data.Icon;
+        
+        var spriteRendererFrame = _background.gameObject.GetComponent<SpriteRenderer>();
+        //spriteRendererFrame.color = data.FrameColor;
     }
 }

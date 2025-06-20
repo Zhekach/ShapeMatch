@@ -5,8 +5,8 @@ using UnityEngine;
 public class LevelShapesConfig : ScriptableObject
 {
     [SerializeField] private int _threesomeCount;
-    [SerializeField] private List<ShapeConfig> _shapes;
+    [SerializeField] private List<ShapeConfig> _shapeConfigs;
     
     public int ThreesomeCount => _threesomeCount;
-    public List<ShapeConfig> Shapes => new (_shapes);
+    public List<ShapeConfig> ShapeConfigs => new (_shapeConfigs);
 }

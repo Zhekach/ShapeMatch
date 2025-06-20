@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fb55991865645d093df13eae8988ac4, type: 3}
-  m_Name: Level1_Config
+  m_Script: {fileID: 11500000, guid: 7e2367a0c2454984a6f6b075385373e9, type: 3}
+  m_Name: ShapeConfig 1
   m_EditorClassIdentifier: 
-  _threesomeCount: 5
-  _shapeConfigs:
-  - {fileID: 11400000, guid: 3d0ccd521d0f0d5418773289f493fd6b, type: 2}
-  - {fileID: 11400000, guid: 417f24a37641bfd4a8286eb3335f0262, type: 2}
+  _animalType: 4
+  _colorType: 0
+  _figure: 1
+  _prefab: {fileID: 1057491913647920565, guid: d9d1e8f1294605c43a3a924b968fb22d, type: 3}

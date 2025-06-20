@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using Random = System.Random;
 
 public class PrefabShapesGenerator : IShapesGenerator
 {
     private LevelShapesConfig _shapesConfig;
+    private readonly GameObject _parent;
     private const int Threesome = 3;
     private Random _random = new ();
 
-    public PrefabShapesGenerator(LevelShapesConfig shapesConfig)
+    public PrefabShapesGenerator(LevelShapesConfig shapesConfig, GameObject parent)
     {
         _shapesConfig = shapesConfig;
+        _parent = parent;
     }
 
     public List<Shape> GenerateShapes(int threesomesCount)
@@ -21,6 +24,8 @@ public class PrefabShapesGenerator : IShapesGenerator
             shapes.AddRange(GenerateShapeThreesome());
         }
         
+        ShuffleShapes(shapes);
+        
         return shapes;
     }
 
@@ -28,15 +33,24 @@ public class PrefabShapesGenerator : IShapesGenerator
     {
         int randomShapeIndex = _random.Next(_shapesConfig.ShapeConfigs.Count);
         ShapeConfig shapeConfig = _shapesConfig.ShapeConfigs[randomShapeIndex];
-        
         List<Shape> shapes = new List<Shape>();
+        
         for (int i = 0; i < Threesome; i++)
         {
-            Shape shape = new Shape(shapeConfig);
+            Shape shape = new Shape(shapeConfig, _parent);
             shapes.Add(shape);
         }
 
         return shapes;
+    }
+
+    private void ShuffleShapes(List<Shape> shapes)
+    {
+        for (int i = 0; i < shapes.Count; i++)
+        {
+            int j = _random.Next(i, shapes.Count); 
+            (shapes[i], shapes[j]) = (shapes[j], shapes[i]);
+        }
     }
 }
 

@@ -2,17 +2,25 @@ using UnityEngine;
 
 public class Shape
 {
-    private AnimalType _animalType;
-    private ColorType _frameColor;
-    private FigureType _figure;
-    
-    private GameObject _view;
+    public AnimalType AnimalType { get; }
+    public ColorType FrameColor { get; }
+    public FigureType Figure { get; }
+    public GameObject View { get; }
 
-    public Shape(ShapeConfig config)
+    public Shape(ShapeConfig config, GameObject parent)
     {
-        _animalType = config.AnimalType;
-        _frameColor = config.ColorType;
-        _figure = config.Figure;
-        _view = config.Prefab;
+        AnimalType = config.AnimalType;
+        FrameColor = config.ColorType;
+        Figure = config.Figure;
+        View = config.Prefab;
+
+
+        Initialize(parent);
+    }
+
+    private void Initialize(GameObject parent)
+    {
+        View.transform.parent = parent.transform;
+        View.SetActive(false);
     }
 }

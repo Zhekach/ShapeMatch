@@ -14,13 +14,14 @@ public class Shape
         Figure = config.Figure;
         View = config.Prefab;
 
-
         Initialize(parent);
     }
 
     private void Initialize(GameObject parent)
     {
+        View.AddComponent<ClickableObject>();
         View.transform.parent = parent.transform;
+        View.name = AnimalType.ToString() + FrameColor.ToString() + Figure.ToString();
         View.SetActive(false);
     }
 }

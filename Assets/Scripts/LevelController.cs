@@ -13,8 +13,6 @@ public class LevelController : MonoBehaviour
     private IShapesGenerator _shapesGenerator;
     private List<Shape> _shapes;
     
-    private event Action<Shape> _onShapeClicked;
-    
     private void Start()
     {
         _shapesGenerator = new PrefabShapesGenerator(_levelShapesConfig, _shapesParent.gameObject, OnShapeClicked);
@@ -23,7 +21,6 @@ public class LevelController : MonoBehaviour
         
         _actionBarController = new ActionBarController();
         _actionBarView.Init(_actionBarController);
-        _actionBarController = new ActionBarController();
     }
 
     private List<GameObject> GetObjectsToSpawn()
@@ -39,8 +36,8 @@ public class LevelController : MonoBehaviour
     
     private void OnShapeClicked(Shape shape)
     {
-        _actionBarController.AddShape(shape);
         _actionBarView.AddShape(shape);
+        _actionBarController.AddShape(shape);
         shape.View.SetActive(false);
     }
 }

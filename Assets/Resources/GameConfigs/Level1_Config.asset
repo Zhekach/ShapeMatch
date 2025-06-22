@@ -16,3 +16,5 @@ MonoBehaviour:
   _shapeConfigs:
   - {fileID: 11400000, guid: 3d0ccd521d0f0d5418773289f493fd6b, type: 2}
   - {fileID: 11400000, guid: 417f24a37641bfd4a8286eb3335f0262, type: 2}
+  - {fileID: 11400000, guid: ad07e6a2ebacdcc48b6645507fa656cb, type: 2}
+  - {fileID: 11400000, guid: fe952c9710810ba42bb4f559f55b4da2, type: 2}

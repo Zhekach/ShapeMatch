@@ -149,14 +149,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3d9c91a1794e3a8b0d64fe7e0379ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slots:
-  - {fileID: 275827713}
-  - {fileID: 805423043}
-  - {fileID: 951612722}
-  - {fileID: 388001428}
-  - {fileID: 699477022}
-  - {fileID: 403833970}
-  - {fileID: 759193340}
+  _slotImages:
+  - {fileID: 275827715}
+  - {fileID: 805423045}
+  - {fileID: 951612724}
+  - {fileID: 388001430}
+  - {fileID: 699477024}
+  - {fileID: 403833972}
+  - {fileID: 759193341}
+  _slotDefaultImage: {fileID: 4910970434427507835, guid: d755b80a984cb8e41937080b80c249dd, type: 3}
 --- !u!224 &78660695
 RectTransform:
   m_ObjectHideFlags: 0

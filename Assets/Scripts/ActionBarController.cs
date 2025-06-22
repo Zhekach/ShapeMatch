@@ -15,7 +15,7 @@ public class ActionBarController
     {
         _shapes.Add(shape);
 
-        if (_shapes.Count > _maxCapacity)
+        if (_shapes.Count == _maxCapacity)
         {
             OnLose?.Invoke();
             Debug.Log("YOU LOSE!");

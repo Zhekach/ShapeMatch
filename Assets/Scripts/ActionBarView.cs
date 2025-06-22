@@ -1,45 +1,46 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ActionBarView : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _slots =  new GameObject[7];
-    private ActionBarController _controller;
+    [SerializeField] private List<Image> _slotImages;
+    [SerializeField] private Image _slotDefaultImage;
+    
+    private ActionBarController _actionBarController;
+    private List<ActionBarSlot> _slots = new();
 
     public void Init(ActionBarController controller)
     {
-        _controller = controller;
-        _controller.OnMatchFound += HandleMatchFound;
-        _controller.OnLose += ShowLoseScreen;
+        _slots.Clear();
+        
+        foreach (var image in _slotImages)
+        {
+            _slots.Add(new ActionBarSlot(image, _slotDefaultImage));
+        }
+        
+        _actionBarController = controller;
+        _actionBarController.OnMatchFound += RemoveShapes;
     }
 
     public void AddShape(Shape shape)
     {
-        var image = _slots[0].GetComponent<Image>();
-        image.sprite = shape.Sprite;
-        
-        UpdateLayout(); // если надо расставлять визуально
+        var slot = _slots.FirstOrDefault(s => !s.IsOccupied);
+        if (slot != null)
+            slot.SetShape(shape);
     }
 
-    private void HandleMatchFound(List<Shape> matchedShapes)
+    public void RemoveShapes(List<Shape> matchedShapes)
     {
         foreach (var shape in matchedShapes)
         {
-            Destroy(shape.View); // или ObjectPool
+            var slot = _slots.FirstOrDefault(s => s.GetShape() == shape);
+            if (slot != null)
+            {
+                slot.Clear();
+                Destroy(shape.View);
+            }
         }
-
-        UpdateLayout();
-    }
-
-    private void ShowLoseScreen()
-    {
-        Debug.Log("YOU LOSE!");
-        // TODO: показать экран поражения
-    }
-
-    private void UpdateLayout()
-    {
-        // При необходимости перераспределить позиции
     }
 }

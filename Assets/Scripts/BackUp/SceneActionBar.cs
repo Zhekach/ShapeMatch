@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [ExecuteAlways] // позволяет обновлять в редакторе без Play Mode
-public class ActionBar : MonoBehaviour
+public class SceneActionBar : MonoBehaviour
 {
     private const int DesiredCount = 7;
 
@@ -19,6 +19,11 @@ public class ActionBar : MonoBehaviour
         ControlSlotsCount();
     }
 
+	public void AddShape(GameObject shape)
+	{
+		shape.transform.position = _slots[0].transform.position;
+	}
+
     private void RegenerateSlots()
     {
         // Удаление всех детей-слотов
@@ -31,8 +36,8 @@ public class ActionBar : MonoBehaviour
                 DestroyImmediate(child.gameObject);
         }
         
-        UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
-        UnityEditor.SceneView.RepaintAll();
+        //UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
+        //UnityEditor.SceneView.RepaintAll();
         
         _slots.Clear();
 

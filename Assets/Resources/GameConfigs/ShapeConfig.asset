@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e2367a0c2454984a6f6b075385373e9, type: 3}
   m_Name: ShapeConfig
   m_EditorClassIdentifier: 
-  _animalType: 2
-  _colorType: 3
-  _figure: 1
+  _animalType: 1
+  _colorType: 2
+  _figure: 0
   _prefab: {fileID: 707074753290639010, guid: d8573e42b76dace49bef25a8c19f4d99, type: 3}
+  _sprite: {fileID: 3939886260240111914, guid: 8e958b7d458611844bc9f20917e52987, type: 3}

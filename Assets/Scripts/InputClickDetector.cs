@@ -36,8 +36,8 @@ public class InputClickDetector : MonoBehaviour
         if (hit.collider != null)
         {
             var clickable = hit.collider.GetComponent<ClickableObject>();
-            if (clickable != null)
-                clickable.OnClicked();
+            if (clickable == null) return;
+            clickable.OnClicked();
         }
     }
 }

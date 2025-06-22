@@ -1,18 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
 public class PrefabShapesGenerator : IShapesGenerator
 {
     private LevelShapesConfig _shapesConfig;
+    private event Action<Shape> _onShapeClicked;
     private readonly GameObject _parent;
     private const int Threesome = 3;
     private Random _random = new ();
 
-    public PrefabShapesGenerator(LevelShapesConfig shapesConfig, GameObject parent)
+    public PrefabShapesGenerator(LevelShapesConfig shapesConfig, GameObject parent, Action<Shape> onShapeClicked)
     {
         _shapesConfig = shapesConfig;
         _parent = parent;
+        _onShapeClicked = onShapeClicked;
     }
 
     public List<Shape> GenerateShapes(int threesomesCount)
@@ -37,7 +40,7 @@ public class PrefabShapesGenerator : IShapesGenerator
         
         for (int i = 0; i < Threesome; i++)
         {
-            Shape shape = new Shape(shapeConfig, _parent);
+            Shape shape = new Shape(shapeConfig, _parent, _onShapeClicked);
             shapes.Add(shape);
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelController : MonoBehaviour
@@ -6,15 +7,23 @@ public class LevelController : MonoBehaviour
     [SerializeField] private LevelShapesConfig _levelShapesConfig;
     [SerializeField] private ObjectSpawner _objectSpawner;
     [SerializeField] private GameObject _shapesParent;
+    [SerializeField] private ActionBarView _actionBarView;
+    
+    private ActionBarController _actionBarController;
+    private IShapesGenerator _shapesGenerator;
     private List<Shape> _shapes;
     
-    private IShapesGenerator _shapesGenerator;
-
+    private event Action<Shape> _onShapeClicked;
+    
     private void Start()
     {
-        _shapesGenerator = new PrefabShapesGenerator(_levelShapesConfig, _shapesParent.gameObject);
+        _shapesGenerator = new PrefabShapesGenerator(_levelShapesConfig, _shapesParent.gameObject, OnShapeClicked);
         _shapes = _shapesGenerator.GenerateShapes(_levelShapesConfig.ThreesomeCount);
         _objectSpawner.StartSpawn(GetObjectsToSpawn());
+        
+        _actionBarController = new ActionBarController();
+        _actionBarView.Init(_actionBarController);
+        _actionBarController = new ActionBarController();
     }
 
     private List<GameObject> GetObjectsToSpawn()
@@ -27,4 +36,11 @@ public class LevelController : MonoBehaviour
         
         return objectsToSpawn;
     } 
+    
+    private void OnShapeClicked(Shape shape)
+    {
+        _actionBarController.AddShape(shape);
+        _actionBarView.AddShape(shape);
+        shape.View.SetActive(false);
+    }
 }

@@ -24,6 +24,7 @@ public class Shape
     private void Initialize(GameObject parent, Action<Shape> onShapeClicked)
     {
         View.AddComponent<ClickableObject>();
+        //View.AddComponent<ShapePhysics>();
         View.transform.parent = parent.transform;
         View.name = AnimalType.ToString() + FrameColor.ToString() + Figure.ToString();
         View.GetComponent<ClickableObject>().Init(this, onShapeClicked);

@@ -136,19 +136,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.1287045, y: 0.26762462}
-      - {x: -0.18934236, y: 0.2592368}
-      - {x: -0.25944322, y: 0.115189135}
-      - {x: -0.2741451, y: -0.04199505}
+    - - {x: -0.18934236, y: 0.2592368}
+      - {x: -0.29103094, y: -0.004605055}
       - {x: -0.22416349, y: -0.15087111}
       - {x: -0.16257204, y: -0.22225761}
-      - {x: -0.10028905, y: -0.2590416}
-      - {x: 0.08150852, y: -0.2640965}
-      - {x: 0.14841504, y: -0.22687608}
-      - {x: 0.20537998, y: -0.18700767}
-      - {x: 0.2702776, y: -0.046205938}
-      - {x: 0.25143838, y: 0.122428656}
-      - {x: 0.21865001, y: 0.18703532}
+      - {x: -0.017066404, y: -0.27592736}
+      - {x: 0.204576, y: -0.2212205}
+      - {x: 0.2864303, y: -0.008615017}
       - {x: 0.17746001, y: 0.2702778}
   m_UseDelaunayMesh: 0
 --- !u!50 &3036044364915927655
@@ -164,8 +158,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_LinearDamping: 2
+  m_AngularDamping: 2
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -174,9 +168,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!1 &8573953494707114529
 GameObject:

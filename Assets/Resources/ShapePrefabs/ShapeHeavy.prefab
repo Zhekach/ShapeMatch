@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8167266511131462658}
   - component: {fileID: 4326731250363437866}
   m_Layer: 0
-  m_Name: ShapeTest (1)
+  m_Name: ShapeHeavy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,18 +136,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.1552852, y: 0.26983976}
-      - {x: -0.2181382, y: 0.26366687}
-      - {x: -0.25848734, y: 0.26196587}
-      - {x: -0.27051872, y: 0.19936115}
-      - {x: -0.2751096, y: -0.2062474}
-      - {x: -0.23345365, y: -0.24440813}
-      - {x: -0.18667632, y: -0.2590416}
-      - {x: 0.19936116, y: -0.2711771}
-      - {x: 0.2636325, y: -0.21233481}
-      - {x: 0.2651662, y: 0.20254087}
-      - {x: 0.25584853, y: 0.25790215}
-      - {x: 0.19961053, y: 0.2636326}
+    - - {x: -0.26853764, y: 0.2628795}
+      - {x: -0.268714, y: -0.26929003}
+      - {x: 0.26879913, y: -0.26660877}
+      - {x: 0.2690485, y: 0.2709418}
   m_UseDelaunayMesh: 0
 --- !u!50 &4326731250363437866
 Rigidbody2D:
@@ -161,20 +153,20 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Mass: 5
+  m_LinearDamping: 2
+  m_AngularDamping: 2
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: 39d44fe3ea8ba214290bf9668dffe827, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!1 &8040531230493239333
 GameObject:

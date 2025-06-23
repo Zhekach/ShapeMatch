@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fb55991865645d093df13eae8988ac4, type: 3}
   m_Name: Level1_Config
   m_EditorClassIdentifier: 
-  _threesomeCount: 2
+  _threesomeCount: 10
   _shapeConfigs:
   - {fileID: 11400000, guid: 3d0ccd521d0f0d5418773289f493fd6b, type: 2}
   - {fileID: 11400000, guid: 417f24a37641bfd4a8286eb3335f0262, type: 2}

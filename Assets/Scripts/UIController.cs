@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    [SerializeField] private Button _restartButton;
     [SerializeField] private GameObject _losePanel;
     [SerializeField] private GameObject _winPanel;
     [SerializeField] private LevelController _levelController;
@@ -17,12 +19,14 @@ public class UIController : MonoBehaviour
     {
         _levelController.OnLoseGame += OnLoseGame;
         _levelController.OnWinGame += OnWinGame;
+        _restartButton.onClick.AddListener(_levelController.RestartGame);
     }
     
     private void OnDisable()
     {
         _levelController.OnLoseGame -= OnLoseGame;
         _levelController.OnWinGame -= OnWinGame;
+        _restartButton.onClick.RemoveListener(_levelController.RestartGame);
     }
 
     private void OnLoseGame()

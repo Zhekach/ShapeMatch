@@ -46,6 +46,6 @@ public class ActionBarController
 
     public void ResetShapes()
     {
-        throw new NotImplementedException();
+        _shapes.Clear();
     }
 }

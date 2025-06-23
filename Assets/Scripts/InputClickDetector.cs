@@ -3,7 +3,10 @@
 public class InputClickDetector : MonoBehaviour
 {
     private Camera _mainCamera;
+    private bool _isGameActive = false;
 
+    public void SetGameActivity(bool isGameActive) => _isGameActive = isGameActive;
+    
     private void Awake()
     {
         _mainCamera = Camera.main;
@@ -11,6 +14,8 @@ public class InputClickDetector : MonoBehaviour
 
     private void Update()
     {
+        if (_isGameActive == false) return;
+        
         Vector2 inputPosition;
 
 #if UNITY_EDITOR || UNITY_STANDALONE

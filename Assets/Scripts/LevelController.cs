@@ -16,11 +16,29 @@ public class LevelController : MonoBehaviour
     private void Start()
     {
         _shapesGenerator = new PrefabShapesGenerator(_levelShapesConfig, _shapesParent.gameObject, OnShapeClicked);
-        _shapes = _shapesGenerator.GenerateShapes(_levelShapesConfig.ThreesomeCount);
-        _objectSpawner.StartSpawn(GetObjectsToSpawn());
-        
         _actionBarController = new ActionBarController();
         _actionBarView.Init(_actionBarController);
+        
+        StartGame();
+    }
+
+    public void RestartGame()
+    {
+        foreach (var shape in _shapes)
+        {
+            Destroy(shape.View);
+            _shapes.Clear();
+        }
+        
+        _actionBarController.ResetShapes();
+        _actionBarView.ResetShapes();
+        StartGame();
+    }
+    
+    private void StartGame()
+    {
+        _shapes = _shapesGenerator.GenerateShapes(_levelShapesConfig.ThreesomeCount);
+        _objectSpawner.StartSpawn(GetObjectsToSpawn());
     }
 
     private List<GameObject> GetObjectsToSpawn()

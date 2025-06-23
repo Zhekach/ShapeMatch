@@ -43,4 +43,9 @@ public class ActionBarView : MonoBehaviour
             }
         }
     }
+
+    public void ResetShapes()
+    {
+        throw new System.NotImplementedException();
+    }
 }

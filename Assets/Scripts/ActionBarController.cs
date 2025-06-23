@@ -15,14 +15,13 @@ public class ActionBarController
     {
         _shapes.Add(shape);
 
+        TryMatch();
+        
         if (_shapes.Count == _maxCapacity)
         {
             OnLose?.Invoke();
             Debug.Log("YOU LOSE!");
-            return;
         }
-
-        TryMatch();
     }
 
     private void TryMatch()
@@ -44,4 +43,9 @@ public class ActionBarController
     }
 
     public IReadOnlyList<Shape> GetCurrentShapes() => _shapes;
+
+    public void ResetShapes()
+    {
+        throw new NotImplementedException();
+    }
 }

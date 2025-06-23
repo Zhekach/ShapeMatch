@@ -7,6 +7,7 @@ public class Shape
     public AnimalType AnimalType { get; }
     public ColorType FrameColor { get; }
     public FigureType Figure { get; }
+    public AbilityType Ability { get;}
     public GameObject View { get; }
     public Sprite  Sprite { get; }
 
@@ -15,6 +16,7 @@ public class Shape
         AnimalType = config.AnimalType;
         FrameColor = config.ColorType;
         Figure = config.Figure;
+        Ability = config.Ability;
         View = config.Prefab;
         Sprite = config.Sprite;
 

@@ -22,6 +22,17 @@ public class ActionBarView : MonoBehaviour
         
         _actionBarController = controller;
         _actionBarController.OnMatchFound += RemoveShapes;
+        _actionBarController.OnShapeRemoved += RemoveShape;
+    }
+
+    private void OnEnable()
+    {
+    }
+    
+    private void OnDisable()
+    {
+        _actionBarController.OnMatchFound -= RemoveShapes;
+        _actionBarController.OnShapeRemoved -= RemoveShape;
     }
 
     public void AddShape(Shape shape)
@@ -31,21 +42,21 @@ public class ActionBarView : MonoBehaviour
             slot.SetShape(shape);
     }
 
-    public void RemoveShapes(List<Shape> matchedShapes)
+    private void RemoveShapes(List<Shape> matchedShapes)
     {
         foreach (var shape in matchedShapes)
         {
-            var slot = _slots.FirstOrDefault(s => s.GetShape() == shape);
-            if (slot != null)
-            {
-                slot.Clear();
-                Destroy(shape.View);
-            }
+            RemoveShape(shape);
         }
     }
-
-    public void ResetShapes()
+    
+    private void RemoveShape(Shape shape)
     {
-        Init(_actionBarController);
+        var slot = _slots.FirstOrDefault(s => s.GetShape() == shape);
+        if (slot != null)
+        {
+            slot.Clear();
+            Destroy(shape.View);
+        }
     }
 }

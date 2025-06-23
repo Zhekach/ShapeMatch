@@ -7,6 +7,7 @@ public class ShapeConfig : ScriptableObject
     [SerializeField] private AnimalType _animalType;
     [SerializeField] private ColorType _colorType;
     [SerializeField] private FigureType _figure;
+    [SerializeField] private AbilityType _abilityType;
     
     [SerializeField] private GameObject _prefab;
     [SerializeField] private Sprite _sprite;
@@ -14,6 +15,7 @@ public class ShapeConfig : ScriptableObject
     public AnimalType AnimalType => _animalType;
     public ColorType ColorType => _colorType;
     public FigureType Figure => _figure;
+    public AbilityType Ability => _abilityType;
     public GameObject Prefab => Instantiate(_prefab);
     public Sprite Sprite => _sprite;
 }
@@ -40,4 +42,12 @@ public enum AnimalType
     Owl,
     Cat,
     Dog,
+}
+
+public enum AbilityType
+{
+    Heavy,
+    Explosive,
+    Freezy,
+    Sticky
 }

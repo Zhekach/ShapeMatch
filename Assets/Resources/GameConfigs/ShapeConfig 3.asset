@@ -15,5 +15,6 @@ MonoBehaviour:
   _animalType: 0
   _colorType: 1
   _figure: 2
+  _abilityType: 1
   _prefab: {fileID: 1057491913647920565, guid: 22ad44bbf952ccd4d94e03acaeb1aaca, type: 3}
   _sprite: {fileID: -2661946534870049423, guid: 64dede34252aec648bf2c94714a916a5, type: 3}

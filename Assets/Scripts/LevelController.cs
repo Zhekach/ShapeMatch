@@ -29,13 +29,11 @@ public class LevelController : MonoBehaviour
     private void OnEnable()
     {
         _actionBarController.OnLose += LoseGame;
-        _actionBarController.OnMatchFound += RemoveShapes;
     }
-    
+
     private void OnDisable()
     {
         _actionBarController.OnLose -= LoseGame;
-        _actionBarController.OnMatchFound -= RemoveShapes;
     }
 
 
@@ -46,20 +44,19 @@ public class LevelController : MonoBehaviour
             Destroy(shape.View);
         }
 
-        _shapes.Clear();
-        _actionBarController.ResetShapes();
-        _actionBarView.ResetShapes();
-        StartGame();
+        _shapes = _shapesGenerator.GenerateShapes(_shapes.Count);
+        _objectSpawner.StartSpawn(GetObjectsToSpawn());
     }
 
     private void StartGame()
     {
-        _shapes = _shapesGenerator.GenerateShapes(_levelShapesConfig.ThreesomeCount);
-        _objectSpawner.StartSpawn(GetObjectsToSpawn());
+        int shapesCount = _levelShapesConfig.ThreesomeCount * _shapesGenerator.Threesome;
+        _shapes = _shapesGenerator.GenerateShapes(shapesCount);
         _inputClickDetector.SetGameActivity(true);
+        _objectSpawner.StartSpawn(GetObjectsToSpawn());   
     }
 
-    public void LoseGame()
+    private void LoseGame()
     {
         _inputClickDetector.SetGameActivity(false);
         OnLoseGame?.Invoke();
@@ -80,18 +77,11 @@ public class LevelController : MonoBehaviour
     {
         _actionBarView.AddShape(shape);
         _actionBarController.AddShape(shape);
-        shape.View.SetActive(false);
-    }
-    
-    private void RemoveShapes(List<Shape> shapes)
-    {
-        foreach (var shape in shapes)
-        {
-            Destroy(shape.View);
-            _shapes.Remove(shape);
-        }
-        
-        if(_shapes.Count == 0) 
+        //shape.View.SetActive(false);
+        Destroy(shape.View);
+        _shapes.Remove(shape);
+
+        if (_shapes.Count == 0)
             OnWinGame?.Invoke();
     }
 }

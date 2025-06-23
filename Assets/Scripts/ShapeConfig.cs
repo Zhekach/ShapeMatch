@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "ShapeConfig", menuName = "Game/ShapeConfig")]
 public class ShapeConfig : ScriptableObject

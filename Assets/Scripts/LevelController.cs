@@ -77,7 +77,6 @@ public class LevelController : MonoBehaviour
     {
         _actionBarView.AddShape(shape);
         _actionBarController.AddShape(shape);
-        //shape.View.SetActive(false);
         Destroy(shape.View);
         _shapes.Remove(shape);
 

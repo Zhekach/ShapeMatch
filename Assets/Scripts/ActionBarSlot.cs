@@ -2,9 +2,9 @@
 
 public class ActionBarSlot
 {
-    public Image Image { get; }
+    private Image Image { get; }
     private Shape _currentShape;
-    private Image _defaultImage;
+    private readonly Image _defaultImage;
 
     public bool IsOccupied => _currentShape != null;
 

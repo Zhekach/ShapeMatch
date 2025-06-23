@@ -5,8 +5,8 @@ using UnityEngine;
 public class ObjectSpawner : MonoBehaviour
 {
     [Header("Площадь спавна")]
-    [SerializeField] private Transform _areaCenter; // позиция центра спавна
-    [SerializeField] private Vector2 _areaSize = new Vector2(4f, 2f); // ширина/высота спавна
+    [SerializeField] private Transform _areaCenter;
+    [SerializeField] private Vector2 _areaSize = new Vector2(4f, 2f);
 
     [Header("Настройки")]
     [SerializeField] private float _spawnInterval = 0.5f;

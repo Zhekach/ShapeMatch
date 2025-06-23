@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class ActionBarController
@@ -18,12 +17,12 @@ public class ActionBarController
         _shapes.Add(shape);
 
         TryMatch();
+
+        if (_shapes.Count != _maxCapacity) 
+            return;
         
-        if (_shapes.Count == _maxCapacity)
-        {
-            OnLose?.Invoke();
-            Debug.Log("YOU LOSE!");
-        }
+        OnLose?.Invoke();
+        Debug.Log("YOU LOSE!");
     }
 
     private void TryMatch()
@@ -41,7 +40,7 @@ public class ActionBarController
     private List<List<Shape>> FindMatchingTriples()
     {
         var result = new List<List<Shape>>();
-        var counted = new HashSet<Shape>(); // чтобы не использовать одну фигурку дважды
+        var counted = new HashSet<Shape>();
 
         for (int i = 0; i < _shapes.Count; i++)
         {
@@ -63,12 +62,12 @@ public class ActionBarController
                 }
             }
 
-            if (group.Count == Threesome)
-            {
-                result.Add(group);
-                foreach (var s in group)
-                    counted.Add(s);
-            }
+            if (group.Count != Threesome) 
+                continue;
+            
+            result.Add(group);
+            foreach (var s in group)
+                counted.Add(s);
         }
 
         return result;
@@ -96,7 +95,7 @@ public class ActionBarController
             if (shape.Ability != AbilityType.Explosive) 
                 continue;
             
-            int index = _shapes.IndexOf(shape); // может уже не существовать
+            int index = _shapes.IndexOf(shape);
             if (index < 0)
                 continue;
 
@@ -116,15 +115,6 @@ public class ActionBarController
                 _shapes.Remove(neighbor);
                 OnShapeRemoved?.Invoke(neighbor);
             }
-
         }
-    }
-
-
-    public IReadOnlyList<Shape> GetCurrentShapes() => _shapes;
-
-    public void ResetShapes()
-    {
-        _shapes.Clear();
     }
 }

@@ -23,6 +23,28 @@ public class Shape
 
         Initialize(parent, onShapeClicked);
     }
+    
+    public override bool Equals(object obj)
+    {
+        if (obj is not Shape other)
+            return false;
+
+        return AnimalType == other.AnimalType &&
+               FrameColor == other.FrameColor &&
+               Figure == other.Figure;
+    }
+    
+    public override int GetHashCode()
+    {
+        unchecked
+        {
+            int hash = 17;
+            hash = hash * 23 + AnimalType.GetHashCode();
+            hash = hash * 23 + FrameColor.GetHashCode();
+            hash = hash * 23 + Figure.GetHashCode();
+            return hash;
+        }
+    }
 
     private void Initialize(GameObject parent, Action<Shape> onShapeClicked)
     {

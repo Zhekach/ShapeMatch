@@ -10,9 +10,14 @@ public class ActionBarView : MonoBehaviour
     
     private ActionBarController _actionBarController;
     private List <ActionBarSlot> _slots = new();
+    
+    private bool _isInitialized;
 
     public void Init(ActionBarController controller)
     {
+        if (_isInitialized) 
+            return;
+        
         _slots.Clear();
         
         foreach (var image in _slotImages)
@@ -23,6 +28,8 @@ public class ActionBarView : MonoBehaviour
         _actionBarController = controller;
         _actionBarController.OnMatchFound += RemoveShapes;
         _actionBarController.OnShapeRemoved += RemoveShape;
+        
+        _isInitialized = true;
     }
     
     private void OnDisable()
@@ -33,8 +40,14 @@ public class ActionBarView : MonoBehaviour
 
     public void AddShape(Shape shape)
     {
-        var slot = _slots.FirstOrDefault(s => !s.IsOccupied);
-        slot?.SetShape(shape);
+        foreach (var slot in _slots)
+        {
+            if (slot.IsOccupied) 
+                continue;
+            
+            slot.SetShape(shape);
+            return;
+        }
     }
 
     private void RemoveShapes(List<Shape> matchedShapes)
@@ -47,12 +60,13 @@ public class ActionBarView : MonoBehaviour
     
     private void RemoveShape(Shape shape)
     {
-        var slot = _slots.FirstOrDefault(s => s.GetShape() == shape);
-        
-        if (slot == null) 
-            return;
-        
-        slot.Clear();
-        Destroy(shape.View);
+        foreach (var slot in _slots)
+        {
+            if (slot.GetShape() != shape) 
+                continue;
+            
+            slot.Clear();
+            Destroy(shape.View);
+        }
     }
 }

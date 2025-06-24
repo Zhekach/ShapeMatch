@@ -1,31 +1,33 @@
-﻿using UnityEngine.UI;
+﻿using System;
+using UnityEngine.UI;
 
 public class ActionBarSlot
 {
-    private Image Image { get; }
     private Shape _currentShape;
+    
+    private readonly Image _image;
     private readonly Image _defaultImage;
-
+    
     public bool IsOccupied => _currentShape != null;
 
     public ActionBarSlot(Image image, Image defaultImage)
     {
-        _defaultImage  = defaultImage;
-        Image = image;
+        _image = image ?? throw new ArgumentNullException(nameof(image));
+        _defaultImage = defaultImage ?? throw new ArgumentNullException(nameof(defaultImage));
+        
         Clear();
     }
 
     public void SetShape(Shape shape)
     {
-        _currentShape = shape;
-        Image.sprite = shape.Sprite;
-        Image.enabled = true;
+        _currentShape = shape ?? throw new ArgumentNullException(nameof(shape));
+        _image.sprite = shape.Sprite;
     }
 
     public void Clear()
     {
         _currentShape = null;
-        Image.sprite = _defaultImage.sprite;
+        _image.sprite = _defaultImage.sprite;
     }
 
     public Shape GetShape() => _currentShape;

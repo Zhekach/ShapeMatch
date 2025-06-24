@@ -9,7 +9,7 @@ public class ActionBarView : MonoBehaviour
     [SerializeField] private Image _slotDefaultImage;
     
     private ActionBarController _actionBarController;
-    private List<ActionBarSlot> _slots = new();
+    private List <ActionBarSlot> _slots = new();
 
     public void Init(ActionBarController controller)
     {

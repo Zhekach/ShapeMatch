@@ -45,6 +45,7 @@ public enum AnimalType
 
 public enum AbilityType
 {
+    Normal,
     Heavy,
     Explosive,
     Freezy,

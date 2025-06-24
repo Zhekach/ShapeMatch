@@ -9,6 +9,8 @@ public class Shape
     public AbilityType Ability { get;}
     public GameObject View { get; }
     public Sprite  Sprite { get; }
+    
+    private readonly float _heavyGravityScale = 5f;
 
     public Shape(ShapeConfig config, GameObject parent, Action<Shape> onShapeClicked)
     {
@@ -30,5 +32,16 @@ public class Shape
         View.name = AnimalType.ToString() + FrameColor.ToString() + Figure.ToString();
         View.GetComponent<ClickableObject>().Init(this, onShapeClicked);
         View.SetActive(false);
+        
+        ReleaseHeavyAbility();
+    }
+
+    private void ReleaseHeavyAbility()
+    {
+        if(Ability != AbilityType.Heavy)
+            return;
+        
+        var rigidBody = View.GetComponent<Rigidbody2D>(); 
+        rigidBody.gravityScale = _heavyGravityScale;
     }
 }

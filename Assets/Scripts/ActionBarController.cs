@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class ActionBarController
 {
-    private const int MaxCapacity = 7;
-    private const int MatchCount = 3;
-
+    private readonly int _maxCapacity = 7;
     private readonly List<Shape> _shapes = new();
+    private readonly int Threesome = 3;
 
     public event Action<List<Shape>> OnMatchFound;
     public event Action<Shape> OnShapeRemoved;
@@ -19,11 +18,11 @@ public class ActionBarController
 
         TryMatch();
 
-        if (_shapes.Count >= MaxCapacity)
-        {
-            OnLose?.Invoke();
-            Debug.Log("YOU LOSE!");
-        }
+        if (_shapes.Count != _maxCapacity) 
+            return;
+        
+        OnLose?.Invoke();
+        Debug.Log("YOU LOSE!");
     }
 
     private void TryMatch()
@@ -37,7 +36,7 @@ public class ActionBarController
             OnMatchFound?.Invoke(group);
         }
     }
-
+    
     private List<List<Shape>> FindMatchingTriples()
     {
         var result = new List<List<Shape>>();
@@ -55,23 +54,30 @@ public class ActionBarController
                 var s2 = _shapes[j];
                 if (counted.Contains(s2)) continue;
 
-                if (s1.Equals(s2))
+                if (IsSameType(s1, s2))
                 {
                     group.Add(s2);
-                    if (group.Count == MatchCount)
+                    if (group.Count == Threesome)
                         break;
                 }
             }
 
-            if (group.Count != MatchCount)
+            if (group.Count != Threesome) 
                 continue;
-
+            
             result.Add(group);
             foreach (var s in group)
                 counted.Add(s);
         }
 
         return result;
+    }
+
+    private bool IsSameType(Shape a, Shape b)
+    {
+        return a.AnimalType == b.AnimalType &&
+               a.FrameColor == b.FrameColor &&
+               a.Figure == b.Figure;
     }
 
     private void RemoveShapes(List<Shape> shapesToRemove)
@@ -81,36 +87,33 @@ public class ActionBarController
             _shapes.Remove(shape);
         }
     }
-
+    
     private void ApplyAbilities(List<Shape> matched)
     {
         foreach (var shape in matched)
         {
-            if (shape.Ability != AbilityType.Explosive)
+            if (shape.Ability != AbilityType.Explosive) 
                 continue;
-
+            
             int index = _shapes.IndexOf(shape);
             if (index < 0)
                 continue;
 
-            var neighbors = new List<Shape>();
+            List<Shape> neighbors = new();
 
             if (index > 0)
                 neighbors.Add(_shapes[index - 1]);
+
             if (index < _shapes.Count - 1)
                 neighbors.Add(_shapes[index + 1]);
 
-            var toRemove = new List<Shape>();
             foreach (var neighbor in neighbors)
             {
-                if (neighbor.Equals(shape) == false)
-                    toRemove.Add(neighbor);
-            }
-
-            foreach (var victim in toRemove)
-            {
-                _shapes.Remove(victim);
-                OnShapeRemoved?.Invoke(victim);
+                if (IsSameType(neighbor, shape))
+                    continue;
+                
+                _shapes.Remove(neighbor);
+                OnShapeRemoved?.Invoke(neighbor);
             }
         }
     }
